@@ -73,6 +73,5 @@ export const {
   updateUser,
   updateFullUser,
   updateLoading,
-  updateRole,
 } = authSlice.actions;
 export default authSlice.reducer;

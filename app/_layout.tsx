@@ -11,6 +11,8 @@ import { useEffect } from "react";
 
 import { useColorScheme } from "@/components/useColorScheme";
 import { Text } from "@/components/Themed";
+import { Provider } from "react-redux";
+import store from "@/store";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -57,17 +59,19 @@ function RootLayoutNav() {
   const loggedIn = false;
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      {loggedIn ? (
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-        </Stack>
-      ) : (
-        <Stack>
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        </Stack>
-      )}
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        {loggedIn ? (
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+          </Stack>
+        ) : (
+          <Stack>
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          </Stack>
+        )}
+      </ThemeProvider>
+    </Provider>
   );
 }
