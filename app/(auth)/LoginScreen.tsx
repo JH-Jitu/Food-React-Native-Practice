@@ -4,7 +4,7 @@ import { View, StyleSheet, Pressable, Text } from "react-native";
 
 interface LoginScreenProps {
   title: string;
-  onSubmit: (username: string, password: string) => void;
+  onSubmit: (email: string, password: string) => void;
   submitButtonText: string;
 }
 
@@ -13,11 +13,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({
   onSubmit,
   submitButtonText,
 }) => {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const handleLogin = () => {
-    onSubmit(username, password);
+    onSubmit(email, password);
   };
 
   return (
@@ -30,8 +30,8 @@ const LoginScreen: React.FC<LoginScreenProps> = ({
       >
         <CustomInput
           placeholder="Email"
-          value={username}
-          onChangeText={setUsername}
+          value={email}
+          onChangeText={setEmail}
         />
         <CustomInput
           placeholder="Password"

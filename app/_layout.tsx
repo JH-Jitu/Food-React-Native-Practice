@@ -11,8 +11,9 @@ import { useEffect } from "react";
 
 import { useColorScheme } from "@/components/useColorScheme";
 import { Text } from "@/components/Themed";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "@/store";
+import { RootState } from "@/store/store";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -51,27 +52,31 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <Provider store={store}>
+      <RootLayoutNav />
+    </Provider>
+  );
 }
 
 function RootLayoutNav() {
+  const auth = useSelector((state: RootState) => state?.auth) || {};
+  const { user } = auth;
   const colorScheme = useColorScheme();
-  const loggedIn = false;
+  console.log({ user });
 
   return (
-    <Provider store={store}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        {loggedIn ? (
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-          </Stack>
-        ) : (
-          <Stack>
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          </Stack>
-        )}
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      {user?.email ? (
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        </Stack>
+      ) : (
+        <Stack>
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        </Stack>
+      )}
+    </ThemeProvider>
   );
 }

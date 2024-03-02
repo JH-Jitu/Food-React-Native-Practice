@@ -14,7 +14,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     useLoggedin: (state, action) => {
-      state.session = action.payload.session;
+      // state.session = action.payload.session;
       state.user = action.payload.user;
     },
     useLogout: (state) => {

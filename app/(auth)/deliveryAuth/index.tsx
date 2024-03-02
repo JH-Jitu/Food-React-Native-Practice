@@ -2,12 +2,15 @@ import React from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import LoginScreen from "../LoginScreen";
 import { StatusBar } from "expo-status-bar";
+import { useLoginMutation } from "@/Context/auth/authAPI";
 
 const DeliveryLoginScreen: React.FC = () => {
-  const handleDeliveryLogin = (username: string, password: string) => {
+  const [login, { isLoading, isError, error }] = useLoginMutation();
+  const handleDeliveryLogin = (email: string, password: string) => {
     // Implement Delivery login logic here
-    console.log("Delivery Username:", username);
+    console.log("Delivery email:", email);
     console.log("Delivery Password:", password);
+    login({ email, password });
   };
 
   return (

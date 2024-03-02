@@ -1,20 +1,24 @@
 import { useDispatch } from "react-redux";
-import { apiSlice, apiSliceMicroService } from "../Context/api/apiSlice";
+import { apiSlice } from "../Context/api/apiSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "@/Context/auth/authSlice";
 
 const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
-    // auth: authReducer,
-    // dashboard: dashboardReducer,
-    [apiSliceMicroService.reducerPath]: apiSliceMicroService.reducer,
+    auth: authReducer,
+    dashboard: authReducer,
+    // [apiSliceMicroService.reducerPath]: apiSliceMicroService.reducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddlewares) =>
     getDefaultMiddlewares({
       serializableCheck: false,
       immutableCheck: false,
-    }).concat(apiSlice.middleware, apiSliceMicroService.middleware),
+    }).concat(
+      apiSlice.middleware
+      // apiSliceMicroService.middleware
+    ),
 });
 
 export default store;

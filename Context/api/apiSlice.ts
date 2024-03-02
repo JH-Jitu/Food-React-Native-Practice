@@ -33,10 +33,10 @@ const axiosBaseQuery =
   };
 
 export const apiSlice = createApi({
-  reducerPath: "apiSliceWithoutMicroService",
+  reducerPath: "",
   baseQuery: axiosBaseQuery({
-    baseUrl: API,
-    // baseUrl: "...",
+    // baseUrl: API,
+    baseUrl: "https://jsonplaceholder.typicode.com/users",
   }),
   endpoints: () => ({}),
 });

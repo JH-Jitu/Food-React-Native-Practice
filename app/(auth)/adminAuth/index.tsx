@@ -2,12 +2,15 @@ import React from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import LoginScreen from "../LoginScreen";
 import { StatusBar } from "expo-status-bar";
+import { useLoginMutation } from "@/Context/auth/authAPI";
 
 const AdminLoginScreen: React.FC = () => {
-  const handleAdminLogin = (username: string, password: string) => {
+  const [login, { isLoading, isError, error }] = useLoginMutation();
+  const handleAdminLogin = (email: string, password: string) => {
     // Implement admin login logic here
-    console.log("Admin Username:", username);
+    console.log("Admin Email:", email);
     console.log("Admin Password:", password);
+    login({ email, password });
   };
 
   return (
