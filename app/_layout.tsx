@@ -64,11 +64,11 @@ function RootLayoutNav() {
   const { user } = auth;
   const colorScheme = useColorScheme();
   console.log({ user });
-  const loggedIn = true;
+  // const loggedIn = true;
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      {loggedIn ? (
+      {user?.email ? (
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: "modal" }} />

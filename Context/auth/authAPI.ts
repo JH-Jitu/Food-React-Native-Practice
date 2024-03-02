@@ -9,6 +9,7 @@ import {
   useLogout,
 } from "./authSlice";
 import { Alert } from "react-native";
+import { router } from "expo-router";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -57,6 +58,8 @@ export const authApi = apiSlice.injectEndpoints({
               })
             );
             console.log("Ran!!!");
+
+            router.push("/(tabs)");
           }
         } catch (error: any) {
           alert("Unable to login.");
